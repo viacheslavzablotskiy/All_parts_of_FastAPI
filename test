@@ -1,0 +1,28 @@
+INSERT INTO "user" (id, full_name, email, hashed_password, is_active, is_superuser)
+VALUES(2, 'vlad', 'vlad@gmail.com', 'Real', True, False);
+
+python.exe -m pip install --upgrade pip
+
+
+
+# @pytest.fixture(scope='session')
+# def engine():
+#     return create_engine(SQL_DATABASE_URL)
+#
+#
+# @pytest.fixture(scope='session')
+# def tables(engine):
+#     Base.metadata.create_all(engine)
+#     yield
+#     Base.metadata.drop_all(engine)
+#
+#
+# @pytest.fixture
+# def dbsession(engine, tables):
+#     connection = engine.connect()
+#     transaction = connection.begin()
+#     session = Session(bind=connection)
+#     yield session
+#     session.close()
+#     transaction.rollback()
+#     connection.close()
