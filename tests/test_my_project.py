@@ -5,6 +5,7 @@ from src.auth.models import operation
 from tests.confest import SessionLocal
 
 
+
 def test_add_user():
     server = SessionLocal()
     try:

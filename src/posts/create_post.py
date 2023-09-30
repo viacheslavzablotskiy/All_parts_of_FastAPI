@@ -2,7 +2,6 @@ from sqlalchemy.orm import Session
 from src.posts.schemas import PostCreate
 from src.auth.models import Post
 
-
 def get_posts(db: Session, skip: int = 0, limit: int = 100):
     return db.query(Post).offset(skip).limit(limit).all()
 

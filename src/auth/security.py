@@ -9,7 +9,6 @@ from src.auth.models import User
 from src.auth.utils import crud_user
 from src.db.config import ALGORITHM, SECRET_KEY
 from src.auth.schemas import TokenPayload
-
 from src.db.database import get_db
 
 reusable_oauth2 = OAuth2PasswordBearer(tokenUrl="/login/access-token")

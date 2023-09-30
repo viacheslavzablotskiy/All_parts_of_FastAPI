@@ -10,6 +10,7 @@ from src.auth.utils import crud_user
 from src.db.config import ACCESS_TOKEN_EXPIRE_MINUTES
 from src.db.database import get_db
 
+
 router = APIRouter()
 
 

@@ -3,7 +3,6 @@ from typing import List
 from fastapi import APIRouter, Depends
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
-
 from src.posts.schemas import PostCreate, PostList, PostSingle
 from src.auth.security import get_current_user
 from src.auth.models import User as DBUser

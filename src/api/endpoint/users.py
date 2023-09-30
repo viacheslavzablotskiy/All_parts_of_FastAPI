@@ -7,7 +7,6 @@ from sqlalchemy.orm import Session
 
 from src.auth.security import get_current_active_superuser, get_current_active_user
 
-
 from src.db.database import get_db
 
 
