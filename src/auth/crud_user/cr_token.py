@@ -5,7 +5,7 @@ from jose import jwt
 from src.db.config import SECRET_KEY, access_token_jwt_subject, ALGORITHM
 
 
-def create_access_token(*, data: dict, expires_delta: timedelta = None):
+async def create_access_token(*, data: dict, expires_delta: timedelta = None):
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta

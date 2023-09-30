@@ -19,5 +19,6 @@ class PostCreate(PostBase):
     description: str
 
 
+
 class PostSingle(PostBase):
     description: str

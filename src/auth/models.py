@@ -1,12 +1,11 @@
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Table
 from sqlalchemy.orm import relationship
-from src.db.database import metadata
-from src.db.base_class import Base
+from src.db.database import Base
 
 
 class User(Base):
-    """Model user"""
-    id = Column(Integer, primary_key=True, index=True)
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
     full_name = Column(String, index=True)
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
@@ -16,8 +15,9 @@ class User(Base):
     post = relationship("Post", back_populates="user")
 
 
+
 class Post(Base):
-    """Model post"""
+    __tablename__ = 'posts'
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
     description = Column(String)
@@ -26,11 +26,23 @@ class Post(Base):
     user_id = Column(Integer, ForeignKey("user.id"))
     user = relationship(User, back_populates="post")
 
-
-operation = Table(
-    "operations",
-    metadata,
-    Column("id", Integer, primary_key=True),
-    Column("quantity", String),
-    Column("name", String),
-)
+# users = Table(
+#     'user',
+#     metadata,
+#     Column('id', Integer, primary_key=True),
+#     Column('full_name', String, index=True),
+#     Column('email', String, unique=True, index=True),
+#     Column('hashed_password', String),
+#     Column('is_active', Boolean, default=True),
+#     Column('is_superuser', Boolean, default=False),
+# )
+#
+# posts = Table(
+#     'post',
+#     metadata,
+#     Column('id', Integer, primary_key=True),
+#     Column('title', String),
+#     Column('description', String),
+#     Column('slug', String, unique=True),
+#     Column('user_id', Integer, ForeignKey('user.id')),
+# )

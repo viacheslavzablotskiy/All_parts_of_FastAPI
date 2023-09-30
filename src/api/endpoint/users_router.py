@@ -1,7 +1,7 @@
 from datetime import timedelta
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 from src.auth.crud_user.cr_token import create_access_token
 from src.auth.models import User as DBUser
 from src.auth.schemas import Token, User
@@ -15,22 +15,22 @@ router = APIRouter()
 
 
 @router.post("/login/access-token", response_model=Token, tags=["login"])
-def login_access_token(
-        db: Session = Depends(get_db), form_data: OAuth2PasswordRequestForm = Depends()
+async def login_access_token(
+        db: AsyncSession = Depends(get_db), form_data: OAuth2PasswordRequestForm = Depends()
 ):
     """
     OAuth2 compatible token login, get an access token for future requests
     """
-    user = crud_user.authenticate(
+    user = await crud_user.authenticate(
         db_session=db, email=form_data.username, password=form_data.password
     )
     if not user:
         raise HTTPException(status_code=400, detail="Incorrect email or password")
-    elif not crud_user.is_active(user):
+    elif not await crud_user.is_active(user):
         raise HTTPException(status_code=400, detail="Inactive user")
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     return {
-        "access_token": create_access_token(
+        "access_token": await create_access_token(
             data={"user_id": user.id}, expires_delta=access_token_expires
         ),
         "token_type": "bearer",
@@ -38,7 +38,7 @@ def login_access_token(
 
 
 @router.post("/login/test-token", tags=["login"], response_model=User)
-def test_token(current_user: DBUser = Depends(get_current_user)):
+async def test_token(current_user: DBUser = Depends(get_current_user)):
     """
     Test access token
     """

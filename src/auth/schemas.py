@@ -1,4 +1,5 @@
 from typing import Optional
+
 from pydantic import BaseModel
 
 
@@ -12,8 +13,14 @@ class UserBase(BaseModel):
 class UserBaseInDB(UserBase):
     id: int = None
 
+
     class Config:
         orm_mode = True
+
+
+class UserCreate1(UserBaseInDB):
+    email: str
+    hashed_password: str
 
 
 class UserCreate(UserBaseInDB):

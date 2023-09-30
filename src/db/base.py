@@ -1,1 +1,1 @@
-from src.auth.models import Base
+from src.db.database import Base

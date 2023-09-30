@@ -12,6 +12,7 @@ app = FastAPI()
 
 admin = Admin(app, engine)
 
+
 class UserAdmin(ModelView, model=User):
     column_list = [User.id, User.full_name, User.email, User.hashed_password, User.is_active, User.is_superuser]
 
